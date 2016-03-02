@@ -289,7 +289,7 @@ gboolean connman_client_set_ipv4(ConnmanClient *client, const gchar *device,
 
 	g_value_init(&value, DBUS_TYPE_G_DICTIONARY);
 	g_value_set_boxed(&value, ipv4);
-	ret = connman_set_property(proxy, "IPv4.Configuration", &value, NULL);
+	ret = net_connman_set_property(proxy, "IPv4.Configuration", &value, NULL);
 
 	g_object_unref(proxy);
 
@@ -317,7 +317,7 @@ void connman_client_set_powered(ConnmanClient *client, const gchar *device,
 	g_value_set_boolean(&value, powered);
 
 	error = NULL;
-	connman_set_property(proxy, "Powered", &value, &error);
+	net_connman_set_property(proxy, "Powered", &value, &error);
 	if( error )
 		fprintf (stderr, "error: %s\n", error->message);
 
@@ -325,7 +325,7 @@ void connman_client_set_powered(ConnmanClient *client, const gchar *device,
 }
 
 void connman_client_scan(ConnmanClient *client, const gchar *device,
-						connman_scan_reply callback, gpointer user_data)
+						net_connman_scan_reply callback, gpointer user_data)
 {
 	ConnmanClientPrivate *priv = CONNMAN_CLIENT_GET_PRIVATE(client);
 	DBusGProxy *proxy;
@@ -339,7 +339,7 @@ void connman_client_scan(ConnmanClient *client, const gchar *device,
 	if (proxy == NULL)
 		return;
 
-	connman_scan_async(proxy, callback, user_data);
+	net_connman_scan_async(proxy, callback, user_data);
 
 	g_object_unref(proxy);
 }
@@ -353,7 +353,7 @@ gboolean connman_client_get_offline_status(ConnmanClient *client)
 
 	DBG("client %p", client);
 
-	ret = connman_get_properties(priv->manager, &hash, NULL);
+	ret = net_connman_get_properties(priv->manager, &hash, NULL);
 
 	if (ret == FALSE)
 		goto done;
@@ -375,7 +375,7 @@ void connman_client_set_offlinemode(ConnmanClient *client, gboolean status)
 	g_value_init(&value, G_TYPE_BOOLEAN);
 	g_value_set_boolean(&value, status);
 
-	connman_set_property(priv->manager, "OfflineMode", &value, NULL);
+	net_connman_set_property(priv->manager, "OfflineMode", &value, NULL);
 }
 
 static gboolean network_disconnect(GtkTreeModel *model, GtkTreePath *path,
@@ -398,7 +398,7 @@ static gboolean network_disconnect(GtkTreeModel *model, GtkTreePath *path,
 		return TRUE;
 
 	if (type == CONNMAN_TYPE_WIFI)
-		connman_disconnect(proxy, NULL);
+		net_connman_disconnect(proxy, NULL);
 
 	g_object_unref(proxy);
 
@@ -422,13 +422,13 @@ void connman_client_connect(ConnmanClient *client, const gchar *network)
 	if (proxy == NULL)
 		return;
 
-	connman_connect(proxy, NULL);
+	net_connman_connect(proxy, NULL);
 
 	g_object_unref(proxy);
 }
 
 void connman_client_connect_async(ConnmanClient *client, const gchar *network,
-		connman_connect_reply callback, gpointer userdata)
+		net_connman_connect_reply callback, gpointer userdata)
 {
 	ConnmanClientPrivate *priv = CONNMAN_CLIENT_GET_PRIVATE(client);
 	DBusGProxy *proxy;
@@ -446,7 +446,7 @@ void connman_client_connect_async(ConnmanClient *client, const gchar *network,
 	if (proxy == NULL)
 		goto done;
 
-	connman_connect_async(proxy, callback, userdata);
+	net_connman_connect_async(proxy, callback, userdata);
 
 done:
 	return;
@@ -476,7 +476,7 @@ void connman_client_disconnect(ConnmanClient *client, const gchar *network)
 	if (proxy == NULL)
 		return;
 
-	connman_disconnect(proxy, NULL);
+	net_connman_disconnect(proxy, NULL);
 
 	g_object_unref(proxy);
 }
@@ -532,7 +532,7 @@ void connman_client_remove(ConnmanClient *client, const gchar *network)
 	if (proxy == NULL)
 		return;
 
-	connman_remove(proxy, NULL);
+	net_connman_remove(proxy, NULL);
 
 	g_object_unref(proxy);
 }

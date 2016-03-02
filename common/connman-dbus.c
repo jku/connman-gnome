@@ -655,15 +655,15 @@ DBusGProxy *connman_dbus_create_manager(DBusGConnection *conn,
 
 	DBG("getting manager properties");
 
-	connman_get_properties_async(proxy, manager_properties, store);
+	net_connman_get_properties_async(proxy, manager_properties, store);
 
 	DBG("getting technologies");
 
-	connman_get_technologies_async(proxy, manager_technologies, store);
+	net_connman_get_technologies_async(proxy, manager_technologies, store);
 
 	DBG("getting services");
 
-	connman_get_services_async(proxy, manager_services, store);
+	net_connman_get_services_async(proxy, manager_services, store);
 
 	return proxy;
 }

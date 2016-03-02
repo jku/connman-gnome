@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <node name="/">
-  <interface name="connman">
+  <interface name="net.connman">
     <method name="GetProperties">
       <arg type="a{sv}" direction="out"/>
     </method>

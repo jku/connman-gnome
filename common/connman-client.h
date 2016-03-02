@@ -70,13 +70,13 @@ void connman_client_set_powered(ConnmanClient *client, const gchar *device,
 gboolean connman_client_set_ipv4(ConnmanClient *client, const gchar *device,
 				struct ipv4_config *ipv4_config);
 void connman_client_scan(ConnmanClient *client, const gchar *device,
-							connman_scan_reply callback, gpointer user_data);
+							net_connman_scan_reply callback, gpointer user_data);
 
 void connman_client_connect(ConnmanClient *client, const gchar *network);
 void connman_client_disconnect(ConnmanClient *client, const gchar *network);
 gchar *connman_client_get_security(ConnmanClient *client, const gchar *network);
 void connman_client_connect_async(ConnmanClient *client, const gchar *network,
-				connman_connect_reply callback, gpointer userdata);
+				net_connman_connect_reply callback, gpointer userdata);
 void connman_client_set_remember(ConnmanClient *client, const gchar *network,
 							gboolean remember);
 
