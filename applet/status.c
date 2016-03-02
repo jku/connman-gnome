@@ -102,8 +102,6 @@ static void icon_animation_start(IconAnimation *animation,
 {
 	available = TRUE;
 
-	gtk_status_icon_set_tooltip(statusicon, NULL);
-
 	animation->start = start;
 	animation->end = (end == 0) ? animation->count - 1 : end;
 
@@ -119,8 +117,6 @@ static void icon_animation_start(IconAnimation *animation,
 static void icon_animation_stop(IconAnimation *animation)
 {
 	available = TRUE;
-
-	gtk_status_icon_set_tooltip(statusicon, NULL);
 
 	if (animation->id > 0)
 		g_source_remove(animation->id);
@@ -251,8 +247,6 @@ void status_unavailable(void)
 	available = FALSE;
 
 	gtk_status_icon_set_from_pixbuf(statusicon, pixbuf_notifier);
-	gtk_status_icon_set_tooltip(statusicon,
-				"Connection Manager daemon is not running");
 
 	gtk_status_icon_set_visible(statusicon, TRUE);
 }
@@ -299,7 +293,6 @@ static void set_ready(gint signal)
 
 	if (signal < 0) {
 		gtk_status_icon_set_from_pixbuf(statusicon, pixbuf_wired);
-		gtk_status_icon_set_tooltip(statusicon, NULL);
 		return;
 	}
 
@@ -311,7 +304,6 @@ static void set_ready(gint signal)
 		index = 4;
 
 	gtk_status_icon_set_from_pixbuf(statusicon, pixbuf_signal[index]);
-	gtk_status_icon_set_tooltip(statusicon, NULL);
 }
 
 struct timeout_data {

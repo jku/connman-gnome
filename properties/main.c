@@ -429,7 +429,7 @@ static GtkWidget *create_interfaces(GtkWidget *window)
 
 	scrolled = gtk_scrolled_window_new(NULL, NULL);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled),
-				GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+				GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolled),
 							GTK_SHADOW_OUT);
 	gtk_box_pack_start(GTK_BOX(hbox), scrolled, FALSE, TRUE, 0);

@@ -126,7 +126,6 @@ static void request_input_dialog(GHashTable *request,
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 	gtk_window_set_keep_above(GTK_WINDOW(dialog), TRUE);
 	gtk_window_set_urgency_hint(GTK_WINDOW(dialog), TRUE);
-	gtk_dialog_set_has_separator(GTK_DIALOG(dialog), FALSE);
 	input->dialog = dialog;
 
 	gtk_dialog_add_button(GTK_DIALOG(dialog),
@@ -139,7 +138,7 @@ static void request_input_dialog(GHashTable *request,
 	gtk_table_set_row_spacings(GTK_TABLE(table), 4);
 	gtk_table_set_col_spacings(GTK_TABLE(table), 20);
 	gtk_container_set_border_width(GTK_CONTAINER(table), 12);
-	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), table);
+	gtk_container_add(GTK_CONTAINER(gtk_dialog_get_content_area (GTK_DIALOG(dialog))), table);
 
 	label = gtk_label_new(_("Please provide some network information:"));
 	gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.0);
